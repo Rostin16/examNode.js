@@ -1,62 +1,49 @@
-const { Cookie } = require("express-session");
-const userModel = require("../models/userModel");
+const signIn = require("../models/userModel");
 
-module.exports.signupPage = (req, res) => {
-  return res.render("signup");
-};
-
+// signup
 module.exports.signup = async (req, res) => {
+  let { username, email, password } = req.body;
   try {
-    await userModel.create(req.body);
-    console.log("User Created!");
-    return res.redirect('/login');
+    console.log(req.body);
+    await signIn.create({ username, email, password });
+    console.log("User created successfully");
+    return res.redirect("/login");
   } catch (error) {
-    console.log(error.message);
-    return res.redirect(req.get("Referrer") || "/");
+    console.error(error);
   }
 };
 
-module.exports.logInPage = (req, res) => {
-  return res.render('./login');
+module.exports.signupPage = async (req, res) => {
+  await res.render("signup");
 };
 
-module.exports.login =  (req, res) => {
- return res.redirect("/blog-card");
-};
-module.exports.logout=(req,res) => {
-  return res.clearCookie('user').redirect('/login');
+
+// login
+module.exports.login = async (req, res) => {
+  const { username, password } = req.body;
+  let user = await signIn.findOne({ username: username });
+
+  if (user) {
+    if (user.password === password) {
+      res.cookie("id", user.id);  //create cookie
+      res.redirect("/");
+    } else {
+      console.log("Password Invalid");
+      return res.redirect("/login");
+    }
+  } else {
+    console.log("Invalid Username");
+    return res.redirect("/login");
+  }
 }
 
-// module.exports.login = async (req, res) => {
-//   try {
-//     let user = await userModel.findOne({ username: req.body.username });
+module.exports.loginPage = async (req, res) => {
+  await res.render("login");
+};
 
-//     if (!user) {
-//       console.log("User not found!");
-//       return res.redirect('/login');
-//     }
-
-//     if (user.password !== req.body.password) {
-//       console.log("Invalid password!");
-//       return res.redirect('/login');
-//     }
-
-//     console.log("Login successful!");
-
-//     // Set a cookie with secure options
-//     res.cookie('user', user.id, {
-//       httpOnly: true, // Prevents client-side JS access
-//       secure: false,  // Set to `true` if using HTTPS
-//       maxAge: 1000 * 60 * 60 * 24, // 1 day expiration
-//     });
-
-//     console.log("Cookie set successfully:", user.id);
-//     return res.redirect('/blog-form');
-
-//   } catch (error) {
-//     console.error("Login error:", error.message);
-//     return res.redirect('/login');
-//   }
-// };
-
+// logout
+module.exports.logout = (req, res) => {
+  res.clearCookie("id");
+  res.redirect('/login');
+}
 

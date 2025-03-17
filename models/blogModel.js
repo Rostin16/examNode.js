@@ -1,14 +1,12 @@
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 
-const blogSchema= new mongoose.Schema({
-    userId : String,
-    image: String,
-    blog_title: String,
-    tags: String,
-    username: String,
-    discription: String,
-
-
+const blogSchema = new mongoose.Schema({
+  title: String,
+  image: String,
+  author: String,
+  content: String,
+  
 })
-const blogModel = mongoose.model('blogModel', blogSchema);
-module.exports = blogModel;
+
+const blog = mongoose.model("blogTbl", blogSchema);
+module.exports = blog;

@@ -4,103 +4,98 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Books Database</title>
+  <title>Edit Blog</title>
+  <!-- bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- remixicon -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css"
     integrity="sha512-OQDNdI5rpnZ0BRhhJc+btbbtnxaj+LdQFeh0V9/igiEPDiWE2fG+ZsXl0JEH+bjXKPJ3zcXqNyP4/F/NegVdZg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <!-- bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+  </style>
 </head>
 
-<body>
-  <div class="container mt-5">
-    <!-- header -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-success p-2 text-white mb-4">
-        <div class="container-fluid">
-          <a class="navbar-brand text-white" href="/">
-            <img src="https://cdn-icons-png.flaticon.com/128/18447/18447475.png" class="me-3" style="height: 50px; width: 50px;">
-            <b>Book Entry Form</b>
-         
-          </a>
-            <input class="form-control me-2 w-50" type="search" placeholder="Search by book title">
-              <button class="btn bg-light" type="submit"
-                >Search</button>
-          <ul class="nav justify-content-end">
+<body class="bg-light d-flex align-items-center" style="min-height: 100vh;">
+  <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3">
+      <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center text-primary fw-bold" href="/">
+          <img src="https://www.logoground.com/uploads12/dv12y2023452012023-07-143213308Letter%20A%20Newspaper%20Logo.jpg" alt="Blog Logo"
+            style="height: 50px; width: 50px; border-radius: 50%; margin-right: 10px ;">
+Articles
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link active text-white" aria-current="page" href="/">Home</a>
+              <a class="nav-link active fs-5 text-primary fw-bold" href="/">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white" href="show">Cart</a>
+              <a class="nav-link fs-5 text-primary fw-bold" href="/form">Add Blog</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="edit">Edit</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle fs-5 text-primary fw-bold" href="#" role="button" data-bs-toggle="dropdown">
+                <i class="ri-account-circle-fill" style="font-size: 1.8rem;"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                <li><a class="dropdown-item fs-6 fw-bold text-primary" href="/signup">Signup</a></li>
+                <li><a class="dropdown-item fs-6 fw-bold text-primary" href="/login">Login</a></li>
+                <li><a class="dropdown-item fs-6 fw-bold text-danger" href="/logout">Logout</a></li>
+              </ul>
             </li>
           </ul>
         </div>
-      </nav>
+      </div>
+    </nav>
 
-    <!-- form -->
-    <div class="container form-container" style="margin-top: 10px;">
-      <div class="row justify-content-center">
-        <div class="col-md-8 " >
-          <div class="card" style="width: 700px;">
-            <div class="card-header bg-success p-2 text-light  bg-opacity-10 text-center">
-                <h4>Book Update Details</h4>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card shadow-lg mt-3">
+          <div class="card-header text-center bg-primary text-white fs-4 fw-bold ">
+            Edit Article Details
+          </div>
+          <div class="card-body p-4">
+            <form action="/editData/<%= data._id %>" method="post">
+              <input type="hidden" name="id" value="<%= data._id %>">
+
+              <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" name="title" value="<%= data.title %>" required>
               </div>
-            <div class="card-body">
-              <form action="/editData" method="post" style="font-weight: bold;">
-                <input type="hidden" name="id" value="<%= data._id %>">
-                <div class="row mb-3">
-                  <label for="inputurl" class="col-sm-2 col-form-label">Url (image): </label>
-                  <div class="col-sm-10">
-                    <input type="url" class="form-control" id="url" name="url" placeholder="Enter Book Image URL" value="<%= data.url %>">
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <label for="inputtitle" class="col-sm-2 col-form-label">Title : </label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" id="title" name="title" placeholder="Enter Book Name" value="<%= data.title %>">
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <label for="inputauthor" class="col-sm-2 col-form-label">Author : </label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" id="author" name="author" placeholder="Enter Author Name" value="<%= data.author %>">
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <label for="inputdsc" class="col-sm-2 col-form-label">Description: </label>
-                  <div class="col-sm-10">
-                    <textarea name="dsc" id="dsc" class="form-control" placeholder="Enter Book Description" cols="74"
-                      rows="4"><%= data.dsc %></textarea>
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <label for="inputprice" class="col-sm-2 col-form-label">Price : </label>
-                  <div class="col-sm-10">
-                    <input type="number" class="form-control" id="price" name="price" placeholder="Enter Book Price" value="<%= data.price %>">
-                  </div>
-                </div>
-                <div class="row mb-3">
+
+              <div class="mb-3">
+                <label for="url" class="form-label">Image URL</label>
+                <input type="url" class="form-control" id="url" name="image" value="<%= data.image %>" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="bname" class="form-label">Author</label>
+                <input type="text" class="form-control" id="bname" name="author" value="<%= data.author %>" required>
+              </div>
+
             
-                  <div class="mb-3 d-flex justify-content-center">
-                    <button type="submit" value="Update" class="btn btn-success w-5 ">Update</button>
-              
-                  </div>
-                </div>
-              </form>
-            </div>
+              <div class="mb-3">
+                <label for="dsc" class="form-label">Content</label>
+                <textarea class="form-control" id="dsc" name="content" rows="4" required><%= data.content %></textarea>
+              </div>
+
+              <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-custom btn-sm text-white fw-bold bg-primary">Update Article</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-
-
-  <!-- bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>

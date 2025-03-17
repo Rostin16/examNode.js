@@ -1,22 +1,21 @@
 const { Router } = require("express");
-const blogController = require('../controllers/blogController')
-const userAuth=require("../middlewares/userAuth");
-const blogRouter= Router();
+const { index, form, submit, deleteData, getEditData, editData } = require("../controllers/blogController");
+const { formAuth, singAuth, isAuth } = require("../middlewares/blogAuth");
+const { signup, signupPage, login, loginPage, logout } = require("../controllers/userController");
 
-blogRouter.use(userAuth);
+const router = Router();
 
-blogRouter.get('/blog-form',blogController.blogFormPage);
-blogRouter.post('/blog-form', blogController.blogCreate);
+router.get("/", isAuth, index);
+router.get("/form", isAuth, form);
+router.post("/submit", formAuth, submit);
+router.get("/deleteData/:id", deleteData);
+router.get("/editData", getEditData);
+router.post("/editData/:id", formAuth, editData);
 
-blogRouter.get("/blog-view" , blogController.blogView);
+router.get("/signup", signupPage);
+router.post("/signup", singAuth, signup);
+router.get("/login", loginPage);
+router.post("/login", login);
+router.get("/logout", logout);
 
-blogRouter.get("/blog/delete/:id",blogController.blogDelete);
-
-blogRouter.get("/blog/edit/:id",blogController.blogEditPage);
-blogRouter.post("/blog/edit/:id",blogController.blogEdit);
-
-blogRouter.get("/blog-card",blogController.blogCardPage);
-
-
-
-module.exports = blogRouter;
+module.exports = { router };

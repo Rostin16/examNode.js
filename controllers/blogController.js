@@ -6,7 +6,8 @@ module.exports.index = async (req, res) => {
     let data = await blog.find();
     res.render("index", { data });
   } catch (error) {
-    console.log(error);
+    console.error(error.message);
+   
   }
 };
 
@@ -21,15 +22,15 @@ module.exports.form = async (req, res) => {
 
 // submit
 module.exports.submit = async (req, res) => {
-  // console.log(req.body);
-  const { title, image, bname, type, date, dsc } = req.body;
-
+  const { title, content, image, author } = req.body;
+  console.log(req.body);
+  
   try {
-    const newBlog = await blog.create({ title, image, bname, type, date, dsc });
-    res.cookie('blogId', newBlog._id);
-    res.redirect('/');
+    await blog.create({ title, image, author, content });
+    res.redirect("/");
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    res.status(500).send("Error submitting data");
   }
 };
 
@@ -57,10 +58,10 @@ module.exports.getEditData = async (req, res) => {
 
 module.exports.editData = async (req, res) => {
   let { id } = req.params;
-  const { title, image, bname, type, date, dsc } = req.body;
+  const { title, image, author, content } = req.body;
 
   try {
-    await blog.findByIdAndUpdate(id, { title, image, bname, type, date, dsc });
+    await blog.findByIdAndUpdate(id, { title, image, author,content});
     res.redirect('/');
   } catch (error) {
     console.log(error);

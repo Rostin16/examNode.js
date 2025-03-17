@@ -31,7 +31,7 @@
             <a class="nav-link active fs-5 text-primary fw-bold" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link fs-5 text-primary fw-bold" href="/form">Add Article</a>
+            <a class="nav-link fs-5 text-primary fw-bold" href="/form">Add</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle fs-5 text-primary fw-bold" href="#" role="button" data-bs-toggle="dropdown">
@@ -39,7 +39,7 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-end shadow-sm">
               <li><a class="dropdown-item fs-6 fw-bold text-primary" href="/signup">Signup</a></li>
-              <li><a class="dropdown-item fs-6 fw-bold text-primary" href="/login">Login</a></li>
+              <li><a class="dropdown-item fs-6 fw-bold text-success" href="/login">Login</a></li>
               <li><a class="dropdown-item fs-6 fw-bold text-danger" href="/logout">Logout</a></li>
             </ul>
           </li>
@@ -50,28 +50,23 @@
 
   <!-- Blog Cards -->
   <div class="container mt-4">
-    <div class="row g-4">
-      <% data.map((val)=>{ %>
-      <% let {_id,author,image, title, content} = val; %>
-      <div class="col-12 col-md-6 col-lg-4">
-        <div class="card h-100 shadow-sm border-0">
-          <img src="<%= image %>" class="card-img-top" alt="<%= title %>" style="height: 200px; object-fit: cover;">
-          <div class="card-body">
-            <h5 class="card-title text-primary" style="font-size: 1.5rem; font-weight: bold;">
-              <%= title %>
-            </h5>
-            <p class="card-text mb-1"><strong>Title:</strong> <%= title %></p>
-            <p class="card-text mb-1"><strong>Author:</strong> <%= author %></p>
-            <p class="card-text mb-1"><strong>Content:</strong> <%= content %></p>
-            
+    <div class="row">
+      <% if (data.length > 0) { %>
+        <% data.forEach(blog => { %>
+          <div class="col-md-4">
+            <div class="card mb-3">
+              <img src="<%= blog.image %>" class="card-img-top" alt="Blog Image">
+              <div class="card-body">
+                <h5 class="card-title"><%= blog.title %></h5>
+                <p class="card-text"><%= blog.content %></p>
+                <p class="text-muted">By <%= blog.author %></p>
+              </div>
+            </div>
           </div>
-          <div class="card-footer bg-white d-flex justify-content-between">
-            <a href="/editData?id=<%= _id %>" class="btn bg-primary text-light fw-bold w-45">Edit</a>
-            <a href="/deleteData/<%= _id %>" class="btn bg-danger fw-bold text-light w-45">Delete</a>
-          </div>
-        </div>
-      </div>
-      <% }) %>
+        <% }) %>
+      <% } else { %>
+        <p class="text-center">No blog posts available.</p>
+      <% } %>
     </div>
   </div>
 

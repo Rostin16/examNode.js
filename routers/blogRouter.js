@@ -5,8 +5,8 @@ const { signup, signupPage, login, loginPage, logout } = require("../controllers
 
 const router = Router();
 
-router.get("/", isAuth, index);
-router.get("/form", isAuth, form);
+router.get("/", index);
+router.get("/form", form);
 router.post("/submit", formAuth, submit);
 router.get("/deleteData/:id", deleteData);
 router.get("/editData", getEditData);

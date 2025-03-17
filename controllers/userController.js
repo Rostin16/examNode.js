@@ -25,7 +25,7 @@ module.exports.login = async (req, res) => {
 
   if (user) {
     if (user.password === password) {
-      res.cookie("id", user.id);  //create cookie
+      res.cookie("id", user.id);  
       res.redirect("/");
     } else {
       console.log("Password Invalid");

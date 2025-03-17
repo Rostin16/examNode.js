@@ -15,7 +15,6 @@ const formAuth = (req, res, next) => {
     if (username && email && password) {
       next();
     } else {
-      // res.send("All fields are required.");
       return res.redirect('/login');
     }
   }

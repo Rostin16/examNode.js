@@ -1,4 +1,4 @@
-const { error } = require("console");
+
 const express = require("express");
 const db = require("./configs/exmurl");
 const { router } = require("./routers/blogRouter");

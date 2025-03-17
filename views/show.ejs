@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Books Database</title>
+  <!-- remixicon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css"
+    integrity="sha512-OQDNdI5rpnZ0BRhhJc+btbbtnxaj+LdQFeh0V9/igiEPDiWE2fG+ZsXl0JEH+bjXKPJ3zcXqNyP4/F/NegVdZg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<!-- extra page -->
+<body>
+  <div class="container mt-5">
+    <!-- header -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-success p-2 text-white mb-4">
+      <div class="container-fluid">
+        <a class="navbar-brand text-white" href="/">
+          <img src="https://cdn-icons-png.flaticon.com/128/18447/18447475.png" class="me-3 " style="height: 50px; width: 50px;">
+          <b>Book Entry Form</b>
+       
+        </a>
+          <input class="form-control me-2 w-50" type="search" placeholder="Search by book title">
+            <button class="btn bg-light" type="submit"
+              >Search</button>
+        <ul class="nav justify-content-end">
+          <li class="nav-item">
+            <a class="nav-link active text-white" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="show">Cart</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="edit">Edit</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- search -->
+
+<!-- this code put on form page -->
+  <!-- ejs -->
+  <div class="container mt-5">
+    <div class="row">
+      <% data.map((val)=>{
+        let {_id,url, title, author, dsc, price} = val;
+        %>
+        <div class="card mb-4 mx-4" style="max-width: 540px;">
+          <div class="row g-0">
+            <div class="col-md-4 d-flex align-items-center">
+              <img 
+                src="<%= url %>" 
+                class="img-fluid rounded-start m-3" 
+                alt="<%= title %>" 
+                style="height: 200px; width: 150px;" 
+              />
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h4 class="card-title"><%= title %></h4>
+                <p class="card-text">
+                  <b>Author:</b> <%= author %>
+                </p>
+                <p class="card-text text-justify" style="font-size: 16px;">
+                  <b>Description:</b> 
+                  <small class="text-muted"><%= dsc %></small>
+                </p>
+                <p class="card-text">
+                  <b>Price:</b> Rs. <%= price %> /-
+                </p>
+                <div class="d-flex gap-2">
+                  <a href="/deleteData?id=<%=_id%>" class="btn btn-danger text-light fw-bold">Delete</a>
+                  <a href="/editData?id=<%=_id%>" class="btn btn-primary text-light fw-bold">Edit</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <% }) %>
+
+    </div>
+  </div>
+
+
+  <!-- bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

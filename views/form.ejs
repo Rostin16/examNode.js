@@ -4,40 +4,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Add New Article</title>
+  <title>Add New Blog</title>
   <!-- bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- remixicon -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css"
     integrity="sha512-OQDNdI5rpnZ0BRhhJc+btbbtnxaj+LdQFeh0V9/igiEPDiWE2fG+ZsXl0JEH+bjXKPJ3zcXqNyP4/F/NegVdZg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  
 </head>
 
 <body class="bg-light">
   <div class="container-fluid">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm ">
+    <nav class="navbar navbar-expand-lg" style="background: linear-gradient(135deg, #ff7e5f, #feb47b); box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);">
       <div class="container-fluid">
-        <a class="navbar-brand d-flex align-items-center text-warning fw-bold" href="/">
-          <img src="https://www.logoground.com/uploads12/dv12y2023452012023-07-143213308Letter%20A%20Newspaper%20Logo.jpg" alt="Blog Logo"
-            style="height: 50px; width: 50px; border-radius: 50%; margin-right: 10px;">
-          Articles
+        <a class="navbar-brand d-flex align-items-center text-white fw-bold" href="/">
+          <img src="https://images-platform.99static.com/_7EPAKTtZSNLJmg0oEVJCOEe8cc=/500x500/top/smart/99designs-contests-attachments/8/8071/attachment_8071474"
+            alt="Blog Logo"
+            style="height: 80px; width: 80px; border-radius: 50%; margin-right: 10px; border: 3px solid white;">
+          My Article
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <button class="navbar-toggler text-white border-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link active fs-5 text-warning fw-bold" href="/">Home</a>
+              <a class="nav-link active fs-5 text-white fw-bold" href="/"><i class="ri-home-2-line"></i></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link fs-5 text-warning fw-bold" href="/form">Add Article</a>
+              <a class="nav-link fs-5 text-white fw-bold" href="/form"><i class="ri-add-box-line"></i></a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle fs-5 text-warning fw-bold" href="#" role="button" data-bs-toggle="dropdown">
-                <i class="ri-account-circle-fill" style="font-size: 1.8rem;"></i>
+              <a class="nav-link dropdown-toggle fs-5 text-white fw-bold" href="#" role="button" data-bs-toggle="dropdown">
+                <i class="ri-account-circle-fill" style="font-size: 1.6rem; color: white;"></i>
               </a>
-              <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+              <ul class="dropdown-menu dropdown-menu-end shadow bg-light">
                 <li><a class="dropdown-item fs-6 fw-bold text-primary" href="/signup">Signup</a></li>
                 <li><a class="dropdown-item fs-6 fw-bold text-primary" href="/login">Login</a></li>
                 <li><a class="dropdown-item fs-6 fw-bold text-danger" href="/logout">Logout</a></li>
@@ -50,28 +53,40 @@
     <div class="row justify-content-center mt-3">
       <div class="col-md-8">
         <div class="card">
-          <div class="card-header bg-dark text-center text-white fw-bold fs-4">Add New Article</div>
+          <div class="card-header text-center text-white fw-bold fs-4 " style="background: linear-gradient(135deg, #ff7e5f, #feb47b);">
+            Add New Article
+          </div>
           <div class="card-body">
-            <form action="/submit" method="post">
+            <!-- Your content here -->
+          </div>
+          
+            <form action="/submit" class="mx-3" method="post">
               <div class="mb-3">
-                <label for="title" class="form-label text-success"> Title</label>
-                <input type="text" class="form-control border-success" id="title" name="title" placeholder="Enter article title">
+                <label for="title" class="form-label"> Title</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="">
               </div>
               <div class="mb-3">
                 <label for="url" class="form-label">Image URL</label>
-                <input type="url" class="form-control" id="url" name="image" placeholder="paste url here..">
+                <input type="url" class="form-control" id="url" name="image" placeholder="">
               </div>
               <div class="mb-3">
-                <label for="bname" class="form-label text-success">Author</label>
-                <input type="text" class="form-control border-success" id="bname" name="author" placeholder="Enter Author name(e.g., John Doe)">
+                <label for="bname" class="form-label">Name</label>
+                <input type="text" class="form-control" id="bname" name="bname" placeholder="">
               </div>
-
               <div class="mb-3">
-                <label for="dsc" class="form-label text-success">Content</label>
-                <textarea class="form-control border-success" id="dsc" name="content" rows="4" placeholder="Enter brief content here.. ."></textarea>
+                <label for="type" class="form-label"> Category</label>
+                <input type="text" class="form-control" id="type" name="type" placeholder="">
+              </div>
+              <div class="mb-3">
+                <label for="date" class="form-label">Posted Date</label>
+                <input type="date" class="form-control" id="date" name="date" placeholder="dd-mm-yy">
+              </div>
+              <div class="mb-3">
+                <label for="dsc" class="form-label">Comments</label>
+                <textarea class="form-control" id="dsc" name="dsc" rows="4" placeholder=""></textarea>
               </div>
               <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-success btn-sm text-white fw-bold">Submit</button>
+                <button type="submit" class="btn btn-custom btn-sm text-white fw-bold bg-success">Submit</button>
               </div>
             </form>
           </div>

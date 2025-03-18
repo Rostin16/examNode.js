@@ -22,29 +22,30 @@
 
 <body class="bg-light d-flex align-items-center" style="min-height: 100vh;">
   <div class="container-fluid">
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3">
+    <nav class="navbar navbar-expand-lg" style="background: linear-gradient(135deg, #ff7e5f, #feb47b); box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);">
       <div class="container-fluid">
-        <a class="navbar-brand d-flex align-items-center text-primary fw-bold" href="/">
-          <img src="https://www.logoground.com/uploads12/dv12y2023452012023-07-143213308Letter%20A%20Newspaper%20Logo.jpg" alt="Blog Logo"
-            style="height: 50px; width: 50px; border-radius: 50%; margin-right: 10px ;">
-Articles
+        <a class="navbar-brand d-flex align-items-center text-white fw-bold" href="/">
+          <img src="https://images-platform.99static.com/_7EPAKTtZSNLJmg0oEVJCOEe8cc=/500x500/top/smart/99designs-contests-attachments/8/8071/attachment_8071474"
+            alt="Blog Logo"
+            style="height: 80px; width: 80px; border-radius: 50%; margin-right: 10px; border: 3px solid white;">
+          My Article
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <button class="navbar-toggler text-white border-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link active fs-5 text-primary fw-bold" href="/">Home</a>
+              <a class="nav-link active fs-5 text-white fw-bold" href="/"><i class="ri-home-2-line"></i></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link fs-5 text-primary fw-bold" href="/form">Add Blog</a>
+              <a class="nav-link fs-5 text-white fw-bold" href="/form"><i class="ri-add-box-line"></i></a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle fs-5 text-primary fw-bold" href="#" role="button" data-bs-toggle="dropdown">
-                <i class="ri-account-circle-fill" style="font-size: 1.8rem;"></i>
+              <a class="nav-link dropdown-toggle fs-5 text-white fw-bold" href="#" role="button" data-bs-toggle="dropdown">
+                <i class="ri-account-circle-fill" style="font-size: 1.6rem; color: white;"></i>
               </a>
-              <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+              <ul class="dropdown-menu dropdown-menu-end shadow">
                 <li><a class="dropdown-item fs-6 fw-bold text-primary" href="/signup">Signup</a></li>
                 <li><a class="dropdown-item fs-6 fw-bold text-primary" href="/login">Login</a></li>
                 <li><a class="dropdown-item fs-6 fw-bold text-danger" href="/logout">Logout</a></li>
@@ -57,8 +58,8 @@ Articles
 
     <div class="row justify-content-center">
       <div class="col-md-8">
-        <div class="card shadow-lg mt-3">
-          <div class="card-header text-center bg-primary text-white fs-4 fw-bold ">
+        <div class="card shadow-lg mt-3 ">
+          <div class="card-header text-center bg-danger text-white fs-4 fw-bold ">
             Edit Article Details
           </div>
           <div class="card-body p-4">
@@ -66,7 +67,7 @@ Articles
               <input type="hidden" name="id" value="<%= data._id %>">
 
               <div class="mb-3">
-                <label for="title" class="form-label">Title</label>
+                <label for="title" class="form-label">Blog Title</label>
                 <input type="text" class="form-control" id="title" name="title" value="<%= data.title %>" required>
               </div>
 
@@ -76,18 +77,27 @@ Articles
               </div>
 
               <div class="mb-3">
-                <label for="bname" class="form-label">Author</label>
-                <input type="text" class="form-control" id="bname" name="author" value="<%= data.author %>" required>
+                <label for="bname" class="form-label">Blogger Name</label>
+                <input type="text" class="form-control" id="bname" name="bname" value="<%= data.bname %>" required>
               </div>
 
-            
               <div class="mb-3">
-                <label for="dsc" class="form-label">Content</label>
-                <textarea class="form-control" id="dsc" name="content" rows="4" required><%= data.content %></textarea>
+                <label for="type" class="form-label">Blog Category</label>
+                <input type="text" class="form-control" id="type" name="type" value="<%= data.type %>" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="date" class="form-label">Date Posted</label>
+                <input type="date" class="form-control" id="date" name="date" value="<%= data.date %>" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="dsc" class="form-label">Description</label>
+                <textarea class="form-control" id="dsc" name="dsc" rows="4" required><%= data.dsc %></textarea>
               </div>
 
               <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-custom btn-sm text-white fw-bold bg-primary">Update Article</button>
+                <button type="submit" class="btn btn-custom btn-sm text-white fw-bold bg-primary">Update Blog</button>
               </div>
             </form>
           </div>

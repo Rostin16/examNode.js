@@ -15,31 +15,32 @@
 
 <body class="bg-light">
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3">
+  <nav class="navbar navbar-expand-lg" style="background: linear-gradient(135deg, #ff7e5f, #feb47b); box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);">
     <div class="container-fluid">
-      <a class="navbar-brand d-flex align-items-center text-primary fw-bold" href="/">
-        <img src="https://www.logoground.com/uploads12/dv12y2023452012023-07-143213308Letter%20A%20Newspaper%20Logo.jpg" alt="Blog Logo"
-          style="height: 50px; width: 50px; border-radius: 50%; margin-right: 10px ;">
-        Article
+      <a class="navbar-brand d-flex align-items-center text-white fw-bold" href="/">
+        <img src="https://images-platform.99static.com/_7EPAKTtZSNLJmg0oEVJCOEe8cc=/500x500/top/smart/99designs-contests-attachments/8/8071/attachment_8071474"
+          alt="Blog Logo"
+          style="height: 80px; width: 80px; border-radius: 50%; margin-right: 10px; border: 3px solid white;">
+        My Article
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <button class="navbar-toggler text-white border-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link active fs-5 text-primary fw-bold" href="/">Home</a>
+            <a class="nav-link active fs-5 text-white fw-bold" href="/"><i class="ri-home-2-line"></i></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link fs-5 text-primary fw-bold" href="/form">Add</a>
+            <a class="nav-link fs-5 text-white fw-bold" href="/form"><i class="ri-add-box-line"></i></a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle fs-5 text-primary fw-bold" href="#" role="button" data-bs-toggle="dropdown">
-              <i class="ri-account-circle-fill" style="font-size: 1.8rem;"></i>
+            <a class="nav-link dropdown-toggle fs-5 text-white fw-bold" href="#" role="button" data-bs-toggle="dropdown">
+              <i class="ri-account-circle-fill" style="font-size: 1.6rem; color: white;"></i>
             </a>
-            <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+            <ul class="dropdown-menu dropdown-menu-end shadow">
               <li><a class="dropdown-item fs-6 fw-bold text-primary" href="/signup">Signup</a></li>
-              <li><a class="dropdown-item fs-6 fw-bold text-success" href="/login">Login</a></li>
+              <li><a class="dropdown-item fs-6 fw-bold text-primary" href="/login">Login</a></li>
               <li><a class="dropdown-item fs-6 fw-bold text-danger" href="/logout">Logout</a></li>
             </ul>
           </li>
@@ -47,26 +48,33 @@
       </div>
     </div>
   </nav>
+  
+  
 
   <!-- Blog Cards -->
   <div class="container mt-4">
-    <div class="row">
-      <% if (data.length > 0) { %>
-        <% data.forEach(blog => { %>
-          <div class="col-md-4">
-            <div class="card mb-3">
-              <img src="<%= blog.image %>" class="card-img-top" alt="Blog Image">
-              <div class="card-body">
-                <h5 class="card-title"><%= blog.title %></h5>
-                <p class="card-text"><%= blog.content %></p>
-                <p class="text-muted">By <%= blog.author %></p>
-              </div>
-            </div>
+    <div class="row g-4">
+      <% data.map((val)=>{ %>
+      <% let {_id, title, image, bname, type, date, dsc} = val; %>
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0">
+          <img src="<%= image %>" class="card-img-top" alt="<%= title %>" style="height: 200px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title text-primary" style="font-size: 1.5rem; font-weight: bold;">
+              <%= title %>
+            </h5>
+            <p class="card-text mb-1"><strong>Blogger:</strong> <%= bname %></p>
+            <p class="card-text mb-1"><strong>Category:</strong> <%= type %></p>
+            <p class="card-text mb-1"><strong>Date:</strong> <%= date %></p>
+            <p class="card-text"><strong>Description:</strong> <%= dsc %></p>
           </div>
-        <% }) %>
-      <% } else { %>
-        <p class="text-center">No blog posts available.</p>
-      <% } %>
+          <div class="card-footer bg-white d-flex justify-content-between">
+            <a href="/editData?id=<%= _id %>" class="btn bg-primary text-light fw-bold w-45">Edit</a>
+            <a href="/deleteData/<%= _id %>" class="btn bg-danger fw-bold text-light w-45">Delete</a>
+          </div>
+        </div>
+      </div>
+      <% }) %>
     </div>
   </div>
 

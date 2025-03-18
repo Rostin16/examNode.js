@@ -1,10 +1,10 @@
-
+const { error } = require("console");
 const express = require("express");
 const db = require("./configs/exmurl");
-const { router } = require("./routers/blogRouter");
+const { router } = require("./routers/blog.routes");
 const cookieParser = require("cookie-parser");
 
-const port = 8000;
+const port = 8080;
 const app = express();
 
 app.set("view engine", "ejs");

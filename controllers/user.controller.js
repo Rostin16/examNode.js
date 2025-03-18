@@ -1,7 +1,7 @@
-const signIn = require("../models/userModel");
+const signIn = require("../models/signin.schema");
 
 // signup
-module.exports.signup = async (req, res) => {
+const signup = async (req, res) => {
   let { username, email, password } = req.body;
   try {
     console.log(req.body);
@@ -13,19 +13,19 @@ module.exports.signup = async (req, res) => {
   }
 };
 
-module.exports.signupPage = async (req, res) => {
+const signupPage = async (req, res) => {
   await res.render("signup");
 };
 
 
 // login
-module.exports.login = async (req, res) => {
+const login = async (req, res) => {
   const { username, password } = req.body;
   let user = await signIn.findOne({ username: username });
 
   if (user) {
     if (user.password === password) {
-      res.cookie("id", user.id);  
+      res.cookie("id", user.id);  //create cookie
       res.redirect("/");
     } else {
       console.log("Password Invalid");
@@ -37,13 +37,14 @@ module.exports.login = async (req, res) => {
   }
 }
 
-module.exports.loginPage = async (req, res) => {
+const loginPage = async (req, res) => {
   await res.render("login");
 };
 
 // logout
-module.exports.logout = (req, res) => {
+const logout = (req, res) => {
   res.clearCookie("id");
   res.redirect('/login');
 }
 
+module.exports = { signup, signupPage, login, loginPage, logout }
